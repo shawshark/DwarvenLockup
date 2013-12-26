@@ -5,7 +5,6 @@ author: matthijs110
 
 commands:
   prison:
-     usage: /<command> [prison]
      description: teleports you to a Prison
 
 permissions:

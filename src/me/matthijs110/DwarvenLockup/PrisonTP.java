@@ -4,12 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PrisonTP extends JavaPlugin implements Listener {
+public class PrisonTP extends JavaPlugin implements CommandExecutor {
 
 	// Prison commands
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
@@ -25,14 +25,10 @@ public class PrisonTP extends JavaPlugin implements Listener {
 		Location officerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location captainprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location staffprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		
-		if (cmd.getName().equalsIgnoreCase("prison")) {
+
+		if (sender.hasPermission("prisontp.use")) {
 			if (args.length == 0) {
-				if (sender.hasPermission("prisontp.use")) {
-					p.sendMessage(ChatColor.GREEN + "Usage: /block " + ChatColor.GRAY + "<prison>");
-				} else {
-					p.sendMessage(ChatColor.RED + "You don't have permissions");
-				}
+				p.sendMessage(ChatColor.GREEN + "Usage: /prison " + ChatColor.GRAY + "<prison>");
 			}
 			// C Prison
 			if (args.length == 1 && (args[0].equalsIgnoreCase("C"))) {
@@ -131,6 +127,8 @@ public class PrisonTP extends JavaPlugin implements Listener {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
+		} else {
+			p.sendMessage(ChatColor.RED + "You don't have permissons!");
 		}
 		return false;
 	}
