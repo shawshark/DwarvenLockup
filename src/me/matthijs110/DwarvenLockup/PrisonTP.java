@@ -16,7 +16,7 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 		Player p = (Player) sender;
 
 		Location cprison = new Location (Bukkit.getServer().getWorld("world"), 3284.48976, 63, -418.49132, 359, -3);
-		Location bprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
+		Location bprison = new Location (Bukkit.getServer().getWorld("world"), 3284.48976, 70, -418.49132, 359, -3);
 		Location aprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location eliteprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location masterprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
@@ -32,7 +32,7 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 			}
 			// C Prison
 			if (args.length == 1 && (args[0].equalsIgnoreCase("C"))) {
-				if (sender.hasPermission("prisontp.b")) {
+				if (sender.hasPermission("prisontp.c")) {
 					p.teleport(cprison);
 					p.sendMessage(ChatColor.GREEN + "Teleported to " + ChatColor.GRAY + "Prison C");
 				} else {

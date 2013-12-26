@@ -6,41 +6,5 @@ author: matthijs110
 commands:
   prison:
      description: teleports you to a Prison
-
-permissions:
-  prisontp.*:
-    description: Gives access to teleport to all the prisons
-    children:
-      prisontp.use: true
-      prisontp.c: true
-      prisontp.b: true
-      prisontp.a: true
-      prisontp.elite: true
-      prisontp.master: true
-      prisontp.guard: true
-      prisontp.riot: true
-      prisontp.officer: true
-      prisontp.captain: true
-      prisontp.staff: true
-  prisontp.use:
-    description: Gives access to /prison
-  prisontp.c:
-    description: Gives access to /prison c
-  prisontp.b:
-    description: Gives access to /prison b
-  prisontp.a:
-    description: Gives access to /prison a
-  prisontp.elite:
-    description: Gives access to /prison elite
-  prisontp.master:
-    description: Gives access to /prison master
-  prisontp.guard:
-    description: Gives access to /prison guard
-  prisontp.riot:
-    description: Gives access to /prison riot
-  prisontp.officer:
-    description: Gives access to /prison officer
-  prisontp.captain:
-    description: Gives access to /prison captain
-  prisontp.staff:
-    description: Gives access to /prison staff
+  shop:
+     description: teleports you to the prison shop
