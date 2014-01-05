@@ -16,6 +16,7 @@ public class ShopTP extends JavaPlugin implements Listener {
 		
 		Location cshop = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location bshop = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
+		Location ashop = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		
 		if (cmd.getName().equalsIgnoreCase("shop")) {
 			if (sender.hasPermission("shop.teleport")) {
@@ -26,6 +27,10 @@ public class ShopTP extends JavaPlugin implements Listener {
 				if (sender.hasPermission("shop.teleport.b")) {
 					player.teleport(bshop);
 					player.sendMessage(ChatColor.GREEN + "Teleporting to the " + ChatColor.GRAY + "B Shop");
+				}
+				if (sender.hasPermission("shop.teleport.a")) {
+					player.teleport(ashop);
+					player.sendMessage(ChatColor.GREEN + "Teleporting to the " + ChatColor.GRAY + "A Shop");
 				}
 			} else {
 				player.sendMessage(ChatColor.RED + "You don't have enough permissions!");

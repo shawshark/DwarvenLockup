@@ -8,3 +8,17 @@ commands:
      description: teleports you to a Prison
   shop:
      description: teleports you to the prison shop
+  rules:
+     description: shows all the server/prison rules
+     
+permissions:
+  prisoner.c:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.c: true
+       shop.teleport: true
+       shop.teleport.c: true
+       prison.rankup.c: true
+     

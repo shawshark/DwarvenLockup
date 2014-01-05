@@ -25,13 +25,16 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 		Location officerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location captainprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
 		Location staffprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
+		Location dealerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0 ,0);
+		Location druglordprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location sgtprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
 
-		if (sender.hasPermission("prisontp.use")) {
+		if (sender.hasPermission("prisontp.use") && cmd.getName().equalsIgnoreCase("prison")) {
 			if (args.length == 0) {
 				p.sendMessage(ChatColor.GREEN + "Usage: /prison " + ChatColor.GRAY + "<prison>");
 			}
 			// C Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("C"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("c"))) {
 				if (sender.hasPermission("prisontp.c")) {
 					p.teleport(cprison);
 					p.sendMessage(ChatColor.GREEN + "Teleported to " + ChatColor.GRAY + "Prison C");
@@ -40,7 +43,7 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 				}
 			}
 			// B Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("B"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("b"))) {
 				if (sender.hasPermission("prisontp.b")) {
 					p.teleport(bprison);
 					p.sendMessage(ChatColor.GREEN + "Teleported to " + ChatColor.GRAY + "Prison B");
@@ -49,7 +52,7 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 				}
 			} 	
 			// A Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("A"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("a"))) {
 				if (sender.hasPermission("prisontp.a")) {
 					p.teleport(aprison);
 					p.sendMessage(ChatColor.GREEN + "Teleported to " + ChatColor.GRAY + "Prison A");
@@ -58,64 +61,91 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 				}
 			}
 			// Elite Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Elite"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("elite"))) {
 				if (sender.hasPermission("prisontp.elite")) {
 					p.teleport(eliteprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Elite Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Elite Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Master Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Master"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("master"))) {
 				if (sender.hasPermission("prisontp.master")) {
 					p.teleport(masterprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Master Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Master Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Guard Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Guard"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("guard"))) {
 				if (sender.hasPermission("prisontp.guard")) {
 					p.teleport(guardprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Guard Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Guard Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Riot Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Riot"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("riot"))) {
 				if (sender.hasPermission("prisontp.riot")) {
 					p.teleport(riotprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Riot Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Riot Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Officer Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Officer"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("officer"))) {
 				if (sender.hasPermission("prisontp.officer")) {
 					p.teleport(officerprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Officer Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Officer Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Captain Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Captain"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("captain"))) {
 				if (sender.hasPermission("prisontp.captain")) {
 					p.teleport(captainprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Captain Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Captain Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
 			}
 			// Staff Prison
-			if (args.length == 1 && (args[0].equalsIgnoreCase("Staff"))) {
+			if (args.length == 1 && (args[0].equalsIgnoreCase("staff"))) {
 				if (sender.hasPermission("prisontp.staff")) {
 					p.teleport(staffprison);
-					p.sendMessage(ChatColor.GREEN + "Teleported to the" + ChatColor.GRAY + "Staff Prison");
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Staff Prison");
+				} else {
+					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
+				}
+			}
+			// Dealer Prison
+			if (args.length == 1 && (args[0].equalsIgnoreCase("dealer"))) {
+				if (sender.hasPermission("prisontp.dealer")) {
+					p.teleport(dealerprison);
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "Dealer Prison");
+				} else {
+					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
+				}
+			}
+			// DrugLord Prison
+			if (args.length == 1 && (args[0].equalsIgnoreCase("druglord"))) {
+				if (sender.hasPermission("prisontp.druglord")) {
+					p.teleport(druglordprison);
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "DrugLord Prison");
+				} else {
+					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
+				}
+			}
+			// SGT Prison
+			if (args.length == 1 && (args[0].equalsIgnoreCase("sgt"))) {
+				if (sender.hasPermission("prisontp.sgt")) {
+					p.teleport(sgtprison);
+					p.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "SGT Prison");
 				} else {
 					p.sendMessage(ChatColor.RED + "You arn't ranked up high enough.");
 				}
@@ -128,7 +158,7 @@ public class PrisonTP extends JavaPlugin implements CommandExecutor {
 				}
 			}
 		} else {
-			p.sendMessage(ChatColor.RED + "You don't have permissons!");
+			p.sendMessage(ChatColor.RED + "You don't have enough permissions!");
 		}
 		return false;
 	}
