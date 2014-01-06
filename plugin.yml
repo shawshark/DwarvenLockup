@@ -21,4 +21,105 @@ permissions:
        shop.teleport: true
        shop.teleport.c: true
        prison.rankup.c: true
+  prisoner.b:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.b: true
+       shop.teleport: true
+       shop.teleport.b: true
+       prison.rankup.b: true
+  prisoner.a:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.a: true
+       shop.teleport: true
+       shop.teleport.a: true
+       prison.rankup.a: true
+  prisoner.elite:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.elite: true
+       shop.teleport: true
+       shop.teleport.elite: true
+       prison.rankup.elite: true
+  prisoner.master:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.master: true
+       shop.teleport: true
+       shop.teleport.master: true
+       prison.rankup.master: true
+  prisoner.guard:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.guard: true
+       shop.teleport: true
+       shop.teleport.guard: true
+       prison.rankup.guard: true
+  prisoner.riot:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.riot: true
+       shop.teleport: true
+       shop.teleport.riot: true
+  prisoner.officer:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.officer: true
+       shop.teleport: true
+       shop.teleport.officer: true
+  prisoner.captain:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.captain: true
+       shop.teleport: true
+       shop.teleport.captain: true
+  prisoner.staff:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.staff: true
+       shop.teleport: true
+       shop.teleport.staff: true
+  prisoner.dealer:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.dealer: true
+       shop.teleport: true
+       shop.teleport.dealer: true
+  prisoner.druglord:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.druglord: true
+       shop.teleport: true
+       shop.teleport.druglord: true
+  prisoner.sgt:
+     description: all the permissions for the C-Prisoner rank
+     children:
+       server.rules: true
+       prisontp.use: true
+       prisontp.sgt: true
+       shop.teleport: true
+       shop.teleport.sgt: true
      

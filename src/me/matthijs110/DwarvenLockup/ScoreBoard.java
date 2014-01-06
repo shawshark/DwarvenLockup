@@ -37,7 +37,7 @@ public class ScoreBoard extends JavaPlugin implements Listener {
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		board = manager.getNewScoreboard();
 
-		Objective objective = board.registerNewObjective("Test", "dummy");
+		Objective objective = board.registerNewObjective("coins", "dummy");
 		objective.setDisplayName(ChatColor.RED + "Prisoner: " + ChatColor.GRAY + "" + ChatColor.ITALIC + player.getPlayerListName());
 		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
@@ -55,7 +55,25 @@ public class ScoreBoard extends JavaPlugin implements Listener {
 			RankupPrice.setScore(0);
 		}
 		if (player.hasPermission("prison.rankup.c")) { //The permission node needs to be in that rank. Value contains amount of money for rankup to B. //
-			RankupPrice.setScore(2000);
+			RankupPrice.setScore(25000);
+		}
+		if (player.hasPermission("prison.rankup.b")) {
+			RankupPrice.setScore(50000);
+		}
+		if (player.hasPermission("prison.rankup.a")) {
+			RankupPrice.setScore(100000);
+		}
+		if (player.hasPermission("prison.rankup.elite")) {
+			RankupPrice.setScore(225000);
+		}
+		if (player.hasPermission("prison.rankup.master")) {
+			RankupPrice.setScore(500000);
+		}
+		if (player.hasPermission("prison.rankup.guard")) {
+			RankupPrice.setScore(1500000);
+		}
+		if (player.hasPermission("prison.rankup.done")) {
+			RankupPrice.setScore(0);
 		}
 		player.setScoreboard(board);
 	}

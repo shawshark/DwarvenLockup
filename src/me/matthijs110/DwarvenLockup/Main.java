@@ -3,6 +3,7 @@ package me.matthijs110.DwarvenLockup;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import me.confuser.barapi.BarAPI;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import net.minecraft.server.v1_7_R1.ChatSerializer;
@@ -54,10 +55,10 @@ public class Main extends JavaPlugin implements Listener {
 		
 		setupEconomy();
 		setupPermissions();
-		/*getServer().getPluginManager().registerEvents(new ShopTP(), this);
+		getServer().getPluginManager().registerEvents(new ShopTP(), this);
 
 		getCommand("prison").setExecutor(new PrisonTP());
-		getCommand("shop").setExecutor(new ShopTP());*/
+		getCommand("shop").setExecutor(new ShopTP());
 	}
 
 	public void Link(Player player) {
@@ -80,6 +81,7 @@ public class Main extends JavaPlugin implements Listener {
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
+	
 
 	// Join
 	@EventHandler
@@ -87,6 +89,10 @@ public class Main extends JavaPlugin implements Listener {
 		@SuppressWarnings("unused")
 		String player = event.getPlayer().getName();
 		Player p = event.getPlayer();
+		
+		/*BarAPI.setMessage(final Player p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);*/
+		BarAPI.setMessage(p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);
+		
 		if (p.hasPlayedBefore()) {
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------" + ChatColor.DARK_RED + "Dwarven Lockup" + ChatColor.DARK_GRAY + " - " + ChatColor.DARK_RED + "Prison Server" + ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------");
 			p.sendMessage("              " + ChatColor.GRAY + "Look around the spawn for help & info!");
@@ -103,8 +109,6 @@ public class Main extends JavaPlugin implements Listener {
 			// Wither bar text
 			/*HeadsUpDisplay.displayTextBar(ChatColor.GRAY + "Welcome to " + ChatColor.DARK_RED + "Dwarven Lockup " + ChatColor.RED + player + ChatColor.GRAY + "!", event.getPlayer(), this);*/
 		} else {
-			Bukkit.broadcastMessage(ChatColor.GRAY + "" + ChatColor.BOLD + "Welcome " + ChatColor.RED + p.getPlayerListName() + ChatColor.GRAY + "" + ChatColor.BOLD + " To" + ChatColor.DARK_RED + "" + ChatColor.BOLD + " Dwarven Lockup" + ChatColor.GRAY + "" + ChatColor.BOLD + "!");
-
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------" + ChatColor.DARK_RED + "Dwarven Lockup" + ChatColor.DARK_GRAY + " - " + ChatColor.DARK_RED + "Prison Server" + ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------");
 			p.sendMessage("              " + ChatColor.GRAY + "Look around the spawn for help & info!");
 			p.sendMessage("                " + ChatColor.GRAY + "Visit our website for a full rules list,");
@@ -114,6 +118,9 @@ public class Main extends JavaPlugin implements Listener {
 			Link(event.getPlayer());
 			Rules(event.getPlayer());
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
+			
+			Bukkit.broadcastMessage(ChatColor.GRAY + "" + ChatColor.BOLD + "Welcome " + ChatColor.RED + p.getPlayerListName() + ChatColor.GRAY + "" + ChatColor.BOLD + " To" + ChatColor.DARK_RED + "" + ChatColor.BOLD + " Dwarven Lockup" + ChatColor.GRAY + "" + ChatColor.BOLD + "!");
+			event.setJoinMessage(ChatColor.RED + "" + p.getPlayerListName() + ChatColor.GRAY + " Joined!");
 		}
 	}
 	// Leave
@@ -143,14 +150,7 @@ public class Main extends JavaPlugin implements Listener {
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
-		// TEMPORARY!
-		if (cmd.getName().equalsIgnoreCase("prison") || (args.length > 1) && sender.hasPermission("prisontp.*")) {
-			sender.sendMessage(ChatColor.RED + "This option will be available when the prison is finished!");
-		}
-		if (cmd.getName().equalsIgnoreCase("shop") || (args.length > 1) && sender.hasPermission("prisontp.*")) {
-			sender.sendMessage(ChatColor.RED + "This option will be available when the prison is finished!");
-		}
-		//\\TEMPORARY
+		
 		if (sender.hasPermission("server.rules") && (sender instanceof Player)) {
 			if (cmd.getName().equalsIgnoreCase("rules")) 
 				if (args.length == 1 && args[0].equalsIgnoreCase("1")) {
