@@ -26,7 +26,7 @@ permissions:
       prison.rankup.c: true
       prison.rankup.*: false
   prisoner.b:
-    description: all the permissions for the C-Prisoner rank
+    description: all the permissions for the B-Prisoner rank
     children:
       server.rules: true
       prisontp.use: true
@@ -39,7 +39,7 @@ permissions:
       prison.rankup.b: true
       prison.rankup.*: false
   prisoner.a:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the A-Prisoner rank
      children:
        server.rules: true
        prisontp.a: true
@@ -50,7 +50,7 @@ permissions:
        prison.rankup.a: true
        prison.rankup.*: false
   prisoner.elite:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Elite-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -62,7 +62,7 @@ permissions:
        prison.rankup.elite: true
        prison.rankup.*: false
   prisoner.master:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Master-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -74,7 +74,7 @@ permissions:
        prison.rankup.master: true
        prison.rankup.*: false
   prisoner.guard:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Guard-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -86,7 +86,7 @@ permissions:
        prison.rankup.guard: true
        prison.rankup.*: false
   prisoner.riot:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Riot-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -98,7 +98,7 @@ permissions:
        prison.rankup.elite: true
        prison.rankup.*: false
   prisoner.officer:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Officer-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -110,7 +110,7 @@ permissions:
        prison.rankup.officer: true
        prison.rankup.*: false
   prisoner.captain:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Captain-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -122,7 +122,7 @@ permissions:
        prison.rankup.captain: true
        prison.rankup.*: false
   prisoner.staff:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Staff-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -133,7 +133,7 @@ permissions:
        prison.rankup.staff: true
        prison.rankup.*: false
   prisoner.dealer:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Dealer-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -144,7 +144,7 @@ permissions:
        prison.rankup.dealer: true
        prison.rankup.*: false
   prisoner.druglord:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the Druglord-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -155,7 +155,7 @@ permissions:
        prison.rankup.druglord: true
        prison.rankup.*: false
   prisoner.sgt:
-     description: all the permissions for the C-Prisoner rank
+     description: all the permissions for the SGT-Prisoner rank
      children:
        server.rules: true
        prisontp.use: true
@@ -165,7 +165,7 @@ permissions:
        shop.teleport.sgt: true
        prison.rankup.sgt: true
        prison.rankup.*: false
-  prison.rankup.done:
+  prisoner.done:
      description: No score status
      children:
        prison.rankup.done: true
