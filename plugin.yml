@@ -170,4 +170,9 @@ permissions:
      children:
        prison.rankup.done: true
        prison.rankup.*: false
+       server.rules: true
+       prisontp.use: true
+       prisontp.*: true
+       shop.teleport: true
+       shop.teleport.*: true
      
