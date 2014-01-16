@@ -10,9 +10,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PrisonTP extends JavaPlugin implements CommandExecutor {
+		
+	// Prison enter message
+	
+	/*public void EnterMessage(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		
+		Object cords = player.getLocation().add(-148, 60, -120);
+		
+		if (player.getLocation().equals(cords)) {
+			player.sendMessage("Hi there!");
+		}
+	}*/
 
 	// Prison commands
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
+		
 		Player p = (Player) sender;
 
 		Location cprison = new Location (Bukkit.getServer().getWorld("world"), 3284.48976, 63, -418.49132, 359, -3);

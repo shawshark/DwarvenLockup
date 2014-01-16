@@ -31,7 +31,7 @@ public class Main extends JavaPlugin implements Listener {
 		public static Permission  perm = null;
 		public static int updater = 0;
 	}
-	
+
 	private boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
@@ -50,20 +50,20 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
-		getServer().getPluginManager().registerEvents(new PrisonSignEvent(), this);
 		getServer().getPluginManager().registerEvents(new ScoreBoard(this), this);
-		
-		setupEconomy();
-		setupPermissions();
 		getServer().getPluginManager().registerEvents(new ShopTP(), this);
+		getServer().getPluginManager().registerEvents(new PrisonSignEvent(), this);
 
 		getCommand("prison").setExecutor(new PrisonTP());
 		getCommand("shop").setExecutor(new ShopTP());
+		
+		setupEconomy();
+		setupPermissions();
 	}
 
 	public void Link(Player player) {
 		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"                        §eVisit our site \",\"extra\":[{\"text\":\"§bClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to visit §a§ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\"}}]}");
+				.a("{\"text\":\"   §eVisit our site \",\"extra\":[{\"text\":\"§bClick Here \",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to visit §a§ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\",\"extra\":[{\"text\":\" §3And join the site :) \"}}]}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}

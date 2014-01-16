@@ -9,9 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -51,9 +49,6 @@ public class ScoreBoard extends JavaPlugin implements Listener {
 		score2.setScore(PlayerMoney);
 		
 		Score RankupPrice = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.AQUA + "Rankup price "));
-		if (player.hasPermission("prison.rankup.deputywarden")) {
-			RankupPrice.setScore(0);
-		}
 		if (player.hasPermission("prison.rankup.c")) { //The permission node needs to be in that rank. Value contains amount of money for rankup to B. //
 			RankupPrice.setScore(25000);
 		}
@@ -78,31 +73,36 @@ public class ScoreBoard extends JavaPlugin implements Listener {
 		player.setScoreboard(board);
 	}
 	
+	/*@EventHandler
 	public void onCommandEvent (PlayerCommandPreprocessEvent event, String cmd, String[] args) {
 		Player player = event.getPlayer();
 		String message = event.getMessage().toLowerCase();
-		if (message.contains("eco") == true) {
+		if (message.contains("eco")) {
 			scoreboard(player);
-			player.setScoreboard(board);
 		}
 	}
 	
+	@EventHandler
 	public void onCommandEvent2 (PlayerCommandPreprocessEvent event, String cmd, String[] args) {
 		Player player = event.getPlayer();
 		String message = event.getMessage().toLowerCase();
-		if (message.contains("money") == true) {
+		if (message.contains("money")) {
 			scoreboard(player);
-			player.setScoreboard(board);
 		}
-	}
+	}*/
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		scoreboard(event.getPlayer());
+		SBRefresh();
 	}
-
-	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent event) {
-		scoreboard(event.getPlayer());
+	
+	public void SBRefresh() {
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+			public void run(){
+				for(Player p : Bukkit.getOnlinePlayers()){
+					scoreboard(p);
+				}
+			}
+		}, 0, 5 * 1200);
 	}
 }
