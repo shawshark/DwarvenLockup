@@ -105,9 +105,6 @@ public class Main extends JavaPlugin implements Listener {
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
 
 			event.setJoinMessage(ChatColor.RED + "" + p.getPlayerListName() + ChatColor.GRAY + " Joined!");
-
-			// Wither bar text
-			/*HeadsUpDisplay.displayTextBar(ChatColor.GRAY + "Welcome to " + ChatColor.DARK_RED + "Dwarven Lockup " + ChatColor.RED + player + ChatColor.GRAY + "!", event.getPlayer(), this);*/
 		} else {
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------" + ChatColor.DARK_RED + "Dwarven Lockup" + ChatColor.DARK_GRAY + " - " + ChatColor.DARK_RED + "Prison Server" + ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------");
 			p.sendMessage("              " + ChatColor.GRAY + "Look around the spawn for help & info!");

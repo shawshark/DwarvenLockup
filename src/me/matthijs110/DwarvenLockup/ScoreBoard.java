@@ -11,14 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-public class ScoreBoard extends JavaPlugin implements Listener {
+public class ScoreBoard implements Listener {
 
 	public static Plugin plugin;
 	public ScoreBoard(Main instance) {
@@ -97,7 +96,7 @@ public class ScoreBoard extends JavaPlugin implements Listener {
 	}
 	
 	public void SBRefresh() {
-		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable(){
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask((Plugin) this, new Runnable(){
 			public void run(){
 				for(Player p : Bukkit.getOnlinePlayers()){
 					scoreboard(p);

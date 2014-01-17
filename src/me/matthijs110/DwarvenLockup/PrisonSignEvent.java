@@ -10,9 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class PrisonSignEvent extends JavaPlugin implements Listener {
+public class PrisonSignEvent implements Listener {
 
 	// Colored Text on Signs
 	@EventHandler
