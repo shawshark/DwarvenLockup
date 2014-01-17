@@ -50,8 +50,9 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
-		getServer().getPluginManager().registerEvents(new ScoreBoard(this), this);
+		getServer().getPluginManager().registerEvents(new ScoreBoard(), this);
 		getServer().getPluginManager().registerEvents(new ShopTP(), this);
+		getServer().getPluginManager().registerEvents(new PrisonTP(), this);
 		getServer().getPluginManager().registerEvents(new PrisonSignEvent(), this);
 
 		getCommand("prison").setExecutor(new PrisonTP());
@@ -63,21 +64,21 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void Link(Player player) {
 		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"   §eVisit our site \",\"extra\":[{\"text\":\"§bClick Here \",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to visit §a§ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\",\"extra\":[{\"text\":\" §3And join the site :) \"}}]}]}");
+				.a("{\"text\":\"   ��eVisit our site \",\"extra\":[{\"text\":\"��bClick Here \",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"��7Click to visit ��a��ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\",\"extra\":[{\"text\":\" ��3And join the site :) \"}}]}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 	
 	public void Rules(Player player) {
 		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"                         §aPlease read the \",\"extra\":[{\"text\":\"§c§lRules\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to read the §cRules\"},\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/rules\"}}]}");
+				.a("{\"text\":\"                         ��aPlease read the \",\"extra\":[{\"text\":\"��c��lRules\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"��7Click to read the ��cRules\"},\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/rules\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 	
 	public void MoreRulesLink(Player player) {
 		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"                        §6For the full rules list \",\"extra\":[{\"text\":\"§eClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§9Click to read the full rules list\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com/rules\"}}]}");
+				.a("{\"text\":\"                        ��6For the full rules list \",\"extra\":[{\"text\":\"��eClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"��9Click to read the full rules list\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com/rules\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}

@@ -7,20 +7,27 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
 
-public class PrisonTP implements CommandExecutor {
+public class PrisonTP implements CommandExecutor, Listener {
 		
 	// Prison enter message
 	
-	/*public void EnterMessage(PlayerMoveEvent event) {
+	// X -148 | Y 60 | Z -120
+	
+	@EventHandler
+	public void EnterMessage(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
+		Location loc = new Location (Bukkit.getServer().getWorld("Prison"), -148.00, 60.00, -120.00);
 		
-		Object cords = player.getLocation().add(-148, 60, -120);
+		Object cords = loc;
 		
 		if (player.getLocation().equals(cords)) {
-			player.sendMessage("Hi there!");
+			player.sendMessage(ChatColor.AQUA + "You're in the C prison now!");
 		}
-	}*/
+	}
 
 	// Prison commands
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {

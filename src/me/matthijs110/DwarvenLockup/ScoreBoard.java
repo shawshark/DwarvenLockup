@@ -19,11 +19,6 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class ScoreBoard implements Listener {
 
-	public static Plugin plugin;
-	public ScoreBoard(Main instance) {
-		plugin = instance;
-	}
-
 	static Scoreboard board;
 	Economy eco;
 	Permission perm;
