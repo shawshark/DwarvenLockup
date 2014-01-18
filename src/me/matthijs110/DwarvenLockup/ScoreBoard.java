@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.Plugin;
+
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -19,13 +19,13 @@ import org.bukkit.scoreboard.ScoreboardManager;
 
 public class ScoreBoard implements Listener {
 
-	static Scoreboard board;
+	private Scoreboard board;
 	Economy eco;
 	Permission perm;
 	Player player;
 
 	// Scoreboard
-	public static void scoreboard(Player player){
+	public void scoreboard(Player player){
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		board = manager.getNewScoreboard();
 
@@ -41,7 +41,7 @@ public class ScoreBoard implements Listener {
 
 		Score score2 = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.GRAY + "Money"));
 		score2.setScore(PlayerMoney);
-		
+
 		Score RankupPrice = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.AQUA + "Rankup price "));
 		if (player.hasPermission("prison.rankup.c")) { //The permission node needs to be in that rank. Value contains amount of money for rankup to B. //
 			RankupPrice.setScore(25000);
@@ -66,37 +66,11 @@ public class ScoreBoard implements Listener {
 		}
 		player.setScoreboard(board);
 	}
-	
-	/*@EventHandler
-	public void onCommandEvent (PlayerCommandPreprocessEvent event, String cmd, String[] args) {
-		Player player = event.getPlayer();
-		String message = event.getMessage().toLowerCase();
-		if (message.contains("eco")) {
-			scoreboard(player);
-		}
-	}
-	
+
 	@EventHandler
-	public void onCommandEvent2 (PlayerCommandPreprocessEvent event, String cmd, String[] args) {
-		Player player = event.getPlayer();
-		String message = event.getMessage().toLowerCase();
-		if (message.contains("money")) {
-			scoreboard(player);
-		}
-	}*/
-	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		SBRefresh();
-	}
-	
-	public void SBRefresh() {
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask((Plugin) this, new Runnable(){
-			public void run(){
-				for(Player p : Bukkit.getOnlinePlayers()){
-					scoreboard(p);
-				}
-			}
-		}, 0, 5 * 1200);
+	public void onPlayerJoin(PlayerJoinEvent e) {
+		Player p = e.getPlayer();
+		
+		p.setScoreboard(board);
 	}
 }

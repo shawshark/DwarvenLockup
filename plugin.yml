@@ -175,4 +175,9 @@ permissions:
        prisontp.*: true
        shop.teleport: true
        shop.teleport.*: true
+  prisoner.wt:
+     description: Only for the Warden Team
+     children:
+     shop.teleport: true
+     shop.teleport.*: false
      

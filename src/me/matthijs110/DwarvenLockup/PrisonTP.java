@@ -7,44 +7,26 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PrisonTP implements CommandExecutor, Listener {
-		
-	// Prison enter message
-	
-	// X -148 | Y 60 | Z -120
-	
-	@EventHandler
-	public void EnterMessage(PlayerMoveEvent event) {
-		Player player = event.getPlayer();
-		Location loc = new Location (Bukkit.getServer().getWorld("Prison"), -148.00, 60.00, -120.00);
-		
-		Object cords = loc;
-		
-		if (player.getLocation().equals(cords)) {
-			player.sendMessage(ChatColor.AQUA + "You're in the C prison now!");
-		}
-	}
 
 	// Prison commands
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
 		
 		Player p = (Player) sender;
 
-		Location cprison = new Location (Bukkit.getServer().getWorld("world"), 3284.48976, 63, -418.49132, 359, -3);
-		Location bprison = new Location (Bukkit.getServer().getWorld("world"), 3284.48976, 70, -418.49132, 359, -3);
-		Location aprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location eliteprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location masterprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location guardprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location riotprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location officerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location captainprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location staffprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0 ,0 ,0, 0);
-		Location dealerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0 ,0);
+		Location cprison = new Location (Bukkit.getServer().getWorld("Prison"), 3284.48976, 63, -418.49132, 359, -3);
+		Location bprison = new Location (Bukkit.getServer().getWorld("Prison"), 0, 0, 0, 0, 0);
+		Location aprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location eliteprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location masterprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location guardprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location riotprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location officerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location captainprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location staffprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
+		Location dealerprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
 		Location druglordprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
 		Location sgtprison = new Location (Bukkit.getServer().getWorld(" "), 0, 0, 0, 0, 0);
 
