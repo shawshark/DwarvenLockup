@@ -22,7 +22,6 @@ public class ScoreBoard implements Listener {
 	private Scoreboard board;
 	Economy eco;
 	Permission perm;
-	Player player;
 
 	// Scoreboard
 	public void scoreboard(Player player){
@@ -64,7 +63,6 @@ public class ScoreBoard implements Listener {
 		if (player.hasPermission("prison.rankup.done")) {
 			RankupPrice.setScore(0);
 		}
-		player.setScoreboard(board);
 	}
 
 	@EventHandler
