@@ -11,6 +11,8 @@ commands:
      description: teleports you to the prison shop
   rules:
      description: shows all the server/prison rules
+  guard:
+     description: teleports the player to a guard lounge
      
 permissions:
   prisoner.c:

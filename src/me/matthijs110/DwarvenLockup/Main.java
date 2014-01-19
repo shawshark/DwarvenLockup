@@ -5,7 +5,6 @@ import java.lang.reflect.Modifier;
 
 import me.confuser.barapi.BarAPI;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 import net.minecraft.server.v1_7_R1.ChatSerializer;
 import net.minecraft.server.v1_7_R1.IChatBaseComponent;
 import net.minecraft.server.v1_7_R1.PacketPlayOutChat;
@@ -26,41 +25,27 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 	
-	public static class Global {
-		public static Economy eco = null;
-		public static Permission  perm = null;
-		public static int updater = 0;
-	}
-
+	public static Economy eco = null;
+	
 	private boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
-			Global.eco = economyProvider.getProvider(); // This line is changed
+			eco = economyProvider.getProvider(); // This line is changed
 		}
-		return (Global.eco != null); //This line is changed
-	}
-	
-	private boolean setupPermissions() {
-		RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-		if (permissionProvider != null) {
-			Global.perm= permissionProvider.getProvider();
-		}
-		return (Global.perm != null);
+		return (eco != null);
 	}
 
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new ScoreBoard(), this);
-		getServer().getPluginManager().registerEvents(new ShopTP(), this);
-		getServer().getPluginManager().registerEvents(new PrisonTP(), this);
 		getServer().getPluginManager().registerEvents(new PrisonSignEvent(), this);
 
 		getCommand("prison").setExecutor(new PrisonTP());
 		getCommand("shop").setExecutor(new ShopTP());
 		getCommand("rules").setExecutor(this);
+		getCommand("guard").setExecutor(new GuardTP());
 		
 		setupEconomy();
-		setupPermissions();
 	}
 
 	public void Link(Player player) {
@@ -69,21 +54,21 @@ public class Main extends JavaPlugin implements Listener {
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
-	
+
 	public void Rules(Player player) {
 		IChatBaseComponent comp = ChatSerializer
 				.a("{\"text\":\"                         §aPlease read the \",\"extra\":[{\"text\":\"§c§lRules\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to read the §cRules\"},\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/rules\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
-	
+
 	public void MoreRulesLink(Player player) {
 		IChatBaseComponent comp = ChatSerializer
 				.a("{\"text\":\"                        §6For the full rules list \",\"extra\":[{\"text\":\"§eClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§9Click to read the full rules list\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com/rules\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
-	
+
 
 	// Join
 	@EventHandler
@@ -91,10 +76,10 @@ public class Main extends JavaPlugin implements Listener {
 		@SuppressWarnings("unused")
 		String player = event.getPlayer().getName();
 		Player p = event.getPlayer();
-		
+
 		/*BarAPI.setMessage(final Player p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);*/
 		BarAPI.setMessage(p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);
-		
+
 		if (p.hasPlayedBefore()) {
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------" + ChatColor.DARK_RED + "Dwarven Lockup" + ChatColor.DARK_GRAY + " - " + ChatColor.DARK_RED + "Prison Server" + ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "------------");
 			p.sendMessage("              " + ChatColor.GRAY + "Look around the spawn for help & info!");
@@ -117,7 +102,7 @@ public class Main extends JavaPlugin implements Listener {
 			Link(event.getPlayer());
 			Rules(event.getPlayer());
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
-			
+
 			Bukkit.broadcastMessage(ChatColor.GRAY + "" + ChatColor.BOLD + "Welcome " + ChatColor.RED + p.getPlayerListName() + ChatColor.GRAY + "" + ChatColor.BOLD + " To" + ChatColor.DARK_RED + "" + ChatColor.BOLD + " Dwarven Lockup" + ChatColor.GRAY + "" + ChatColor.BOLD + "!");
 			event.setJoinMessage(ChatColor.RED + "" + p.getPlayerListName() + ChatColor.GRAY + " Joined!");
 		}
@@ -128,7 +113,7 @@ public class Main extends JavaPlugin implements Listener {
 		Player p = event.getPlayer();
 		event.setQuitMessage(ChatColor.RED + "" + p.getPlayerListName() + ChatColor.GRAY + " Quit!");
 	}
-	
+
 	public void ModifyAllowedCharacters() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		Field field = SharedConstants.class.getDeclaredField("allowedCharacters");
 		field.setAccessible(true);
@@ -142,65 +127,61 @@ public class Main extends JavaPlugin implements Listener {
 		sb.append( suits );
 		field.set( null, sb.toString() );
 	}
-	
+
 	// X = \u2718
 	// V = \u2714
 
-	
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
-		
+
 		if (sender.hasPermission("server.rules") && (sender instanceof Player)) {
-			if (cmd.getName().equalsIgnoreCase("rules")) 
-				if (args.length == 1 && args[0].equalsIgnoreCase("1")) {
-				sender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Server Rules:");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Hacks!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No PVP logging!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Glitches!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No disrespect!");
-				sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Respect higher ranks.");
-				sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Scamming under 10K is allowed.");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  Guards are not allowed to grief other bases!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Spamming!");
-				MoreRulesLink(player);
-				sender.sendMessage(ChatColor.GOLD + "For the Prison rules, do " + ChatColor.GREEN + "/rules 2");
-			}
-			if (args.length == 1 && args[0].equalsIgnoreCase("2")) {
-				sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Prison Rules:");
-				sender.sendMessage(ChatColor.GRAY + "Do NOT have ANY weapons held in your hand. If you are caught with a weapon" + ChatColor.RED + " In NO PvP Arenas:" + ChatColor.GRAY + "the guard will ask you to hand it over and count down from 5 down to 1. If you have not handed it over they can jail for 5 min ONLY, if you hand it over to them after you have been jailed you may be released at the discretion of the guard.");
-				sender.sendMessage(ChatColor.GREEN + "In PvP Areas: " + ChatColor.GRAY + "The guard can kill you on sight or use the protocol above");
-				sender.sendMessage(ChatColor.GRAY + "Illegal Weapons:");
-				sender.sendMessage(ChatColor.GRAY + "- Any damage potions (any of them).");
-				sender.sendMessage(ChatColor.GRAY + "- Bows, arrows.");
-				sender.sendMessage(ChatColor.GRAY + "- Lava buckets.");
-				sender.sendMessage(ChatColor.GRAY + "- Flint and Steel.");
-				sender.sendMessage(ChatColor.GRAY + "- Any swords.");
-				sender.sendMessage(ChatColor.GRAY + "- Eggs.");
-				sender.sendMessage(ChatColor.GRAY + "- Axes (ONLY if used in PVP). You may use them in Mines.");
-				sender.sendMessage(ChatColor.GRAY + "No PVP in front of guards (you can be jailed or killed by guards). Do not leave prison grounds!");
-				MoreRulesLink(player);
-				sender.sendMessage(ChatColor.GOLD + "For the Guard rules, Go to the site ^");
-			}
-			if (!(args.length == 1)) {
-				sender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Server Rules:");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Hacks!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No PVP logging!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Glitches!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No disrespect!");
-				sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Respect higher ranks.");
-				sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Scamming under 10K is allowed.");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  Guards are not allowed to grief other bases!");
-				sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Spamming!");
-				MoreRulesLink(player);
-				sender.sendMessage(ChatColor.GOLD + "For the Prison rules, do " + ChatColor.GREEN + "/rules 2");
-			}
+            if (cmd.getName().equalsIgnoreCase("rules")) 
+                    if (args.length == 1 && args[0].equalsIgnoreCase("1")) {
+                    sender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Server Rules:");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Hacks!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No PVP logging!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Glitches!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No disrespect!");
+                    sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Respect higher ranks.");
+                    sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Scamming under 10K is allowed.");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  Guards are not allowed to grief other bases!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Spamming!");
+                    MoreRulesLink(player);
+                    sender.sendMessage(ChatColor.GOLD + "For the Prison rules, do " + ChatColor.GREEN + "/rules 2");
+            }
+            if (args.length == 1 && args[0].equalsIgnoreCase("2")) {
+                    sender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Prison Rules:");
+                    sender.sendMessage(ChatColor.GRAY + "Do NOT have ANY weapons held in your hand. If you are caught with a weapon" + ChatColor.RED + " In NO PvP Arenas:" + ChatColor.GRAY + "the guard will ask you to hand it over and count down from 5 down to 1. If you have not handed it over they can jail for 5 min ONLY, if you hand it over to them after you have been jailed you may be released at the discretion of the guard.");
+                    sender.sendMessage(ChatColor.GREEN + "In PvP Areas: " + ChatColor.GRAY + "The guard can kill you on sight or use the protocol above");
+                    sender.sendMessage(ChatColor.GRAY + "Illegal Weapons:");
+                    sender.sendMessage(ChatColor.GRAY + "- Any damage potions (any of them).");
+                    sender.sendMessage(ChatColor.GRAY + "- Bows, arrows.");
+                    sender.sendMessage(ChatColor.GRAY + "- Lava buckets.");
+                    sender.sendMessage(ChatColor.GRAY + "- Flint and Steel.");
+                    sender.sendMessage(ChatColor.GRAY + "- Any swords.");
+                    sender.sendMessage(ChatColor.GRAY + "- Eggs.");
+                    sender.sendMessage(ChatColor.GRAY + "- Axes (ONLY if used in PVP). You may use them in Mines.");
+                    sender.sendMessage(ChatColor.GRAY + "No PVP in front of guards (you can be jailed or killed by guards). Do not leave prison grounds!");
+                    MoreRulesLink(player);
+                    sender.sendMessage(ChatColor.GOLD + "For the Guard rules, Go to the site ^");
+            }
+            if (!(args.length == 1)) {
+                    sender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Server Rules:");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Hacks!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No PVP logging!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Glitches!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No disrespect!");
+                    sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Respect higher ranks.");
+                    sender.sendMessage(ChatColor.DARK_GREEN + "\u2714" + ChatColor.GREEN + "  Scamming under 10K is allowed.");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  Guards are not allowed to grief other bases!");
+                    sender.sendMessage(ChatColor.DARK_RED + "\u2718" + ChatColor.RED + "  No Spamming!");
+                    MoreRulesLink(player);
+                    sender.sendMessage(ChatColor.GOLD + "For the Prison rules, do " + ChatColor.GREEN + "/rules 2");
+            }
 		} else {
 			sender.sendMessage("You don't have permissions!");
 		}
-	if (!(sender instanceof Player)) {
-		sender.sendMessage(ChatColor.RED + "Sorry, you can only read the rules in-game!");
-		return true;
-	}
 		return false;
 	}
 }

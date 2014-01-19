@@ -7,9 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
-public class ShopTP implements CommandExecutor, Listener {
+public class ShopTP implements CommandExecutor {
 
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
 		Player player = (Player) sender;
@@ -26,15 +25,15 @@ public class ShopTP implements CommandExecutor, Listener {
 			}
 			if (sender.hasPermission("shop.teleport.c") && (args[0].equals("C") || (args[0].equals("c")))) {
 				player.teleport(cshop);
-				player.sendMessage(ChatColor.GREEN + "Teleporting to the " + ChatColor.GRAY + "C " + ChatColor.GREEN + "Shop");
+				player.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "C " + ChatColor.GREEN + "Shop");
 			}
 			if (sender.hasPermission("shop.teleport.b") && (args[0].equals("B") || (args[0].equals("b")))) {
 				player.teleport(bshop);
-				player.sendMessage(ChatColor.GREEN + "Teleporting to the " + ChatColor.GRAY + "B " + ChatColor.GREEN + "Shop");
+				player.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "B " + ChatColor.GREEN + "Shop");
 			}
 			if (sender.hasPermission("shop.teleport.a") && (args[0].equals("A") || (args[0].equals("a")))) {
 				player.teleport(ashop);
-				player.sendMessage(ChatColor.GREEN + "Teleporting to the " + ChatColor.GRAY + "A " + ChatColor.GREEN + "Shop");
+				player.sendMessage(ChatColor.GREEN + "Teleported to the " + ChatColor.GRAY + "A " + ChatColor.GREEN + "Shop");
 			}
 		} else {
 			player.sendMessage(ChatColor.RED + "You don't have enough permissions!");
