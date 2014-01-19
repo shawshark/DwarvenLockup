@@ -62,6 +62,6 @@ public class ScoreBoard implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-		scoreboard(p);
+		p.setScoreboard(board);
 	}
 }
