@@ -1,4 +1,4 @@
-package me.matthijs110.DwarvenLockup;
+package me.matthijs110.DwarvenLockup.Extra;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

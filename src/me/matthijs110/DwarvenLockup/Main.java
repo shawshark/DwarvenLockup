@@ -4,6 +4,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import me.confuser.barapi.BarAPI;
+import me.matthijs110.DwarvenLockup.Extra.PrisonSignEvent;
+import me.matthijs110.DwarvenLockup.Extra.ScoreBoard;
+import me.matthijs110.DwarvenLockup.Teleports.GuardTP;
+import me.matthijs110.DwarvenLockup.Teleports.PrisonTP;
+import me.matthijs110.DwarvenLockup.Teleports.ShopTP;
 import net.milkbowl.vault.economy.Economy;
 import net.minecraft.server.v1_7_R1.ChatSerializer;
 import net.minecraft.server.v1_7_R1.IChatBaseComponent;
@@ -25,6 +30,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
 	
+	public ScoreBoard usb = new ScoreBoard(this);
+	
+	// TODO Clean-up the plu
+	//     - Make package for TP classes
+	//     - Make package for Extra
+	
 	public static Economy eco = null;
 	
 	private boolean setupEconomy() {
@@ -36,16 +47,22 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public void onEnable() {
-		getServer().getPluginManager().registerEvents(this, this);
-		getServer().getPluginManager().registerEvents(new ScoreBoard(), this);
-		getServer().getPluginManager().registerEvents(new PrisonSignEvent(), this);
+		setupEconomy();
 
+		RegisterEvents();
+		RegisterCommands();
+	}
+	
+	public void RegisterEvents() {
+		Bukkit.getPluginManager().registerEvents(this, this);
+		Bukkit.getPluginManager().registerEvents(new PrisonSignEvent(), this);
+	}
+	
+	public void RegisterCommands() {
 		getCommand("prison").setExecutor(new PrisonTP());
 		getCommand("shop").setExecutor(new ShopTP());
 		getCommand("rules").setExecutor(this);
 		getCommand("guard").setExecutor(new GuardTP());
-		
-		setupEconomy();
 	}
 
 	public void Link(Player player) {
@@ -76,6 +93,7 @@ public class Main extends JavaPlugin implements Listener {
 		@SuppressWarnings("unused")
 		String player = event.getPlayer().getName();
 		Player p = event.getPlayer();
+		usb.updatescoreboard(p);
 
 		/*BarAPI.setMessage(final Player p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);*/
 		BarAPI.setMessage(p, ChatColor.GRAY + "Welcome to " + ChatColor.RED + "Dwarven Lockup " + ChatColor.YELLOW + p.getPlayerListName() + ChatColor.GRAY + "!", 10);

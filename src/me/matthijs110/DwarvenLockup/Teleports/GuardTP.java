@@ -1,4 +1,4 @@
-package me.matthijs110.DwarvenLockup;
+package me.matthijs110.DwarvenLockup.Teleports;
 
 import net.minecraft.server.v1_7_R1.ChatSerializer;
 import net.minecraft.server.v1_7_R1.IChatBaseComponent;
@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 public class GuardTP implements CommandExecutor {
 	
-	public void Link(Player player) {
+	public void GuardDonateLink(Player player) {
 		IChatBaseComponent comp = ChatSerializer
 				.a("{\"text\":\"§cPurchase a Guard rank \",\"extra\":[{\"text\":\"§6Here \",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to buy a §6Guard §7rank\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com/shop#guard-ranks-311928\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
@@ -38,7 +38,7 @@ public class GuardTP implements CommandExecutor {
 			}
 		}
 		if (!(sender.hasPermission("guard.loungetp"))) {
-			Link(player);
+			GuardDonateLink(player);
 		}
 		return false;
 	}

@@ -1,4 +1,4 @@
-package me.matthijs110.DwarvenLockup;
+package me.matthijs110.DwarvenLockup.Extra;
 
 import net.minecraft.server.v1_7_R1.ChatSerializer;
 import net.minecraft.server.v1_7_R1.IChatBaseComponent;
@@ -14,7 +14,7 @@ public class AutoMessage extends JavaPlugin {
 	// Hover text events
 	public void Link1(Player player) {
 		IChatBaseComponent comp = ChatSerializer
-				.a("{\"text\":\"§eVisit our site \",\"extra\":[{\"text\":\"§bClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"§7Click to visit §a§ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\"}}]}");
+				.a("{\"text\":\"??eVisit our site \",\"extra\":[{\"text\":\"??bClick Here\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"??7Click to visit ??a??ohttp://dwarvenlockup.enjin.com\"},\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://dwarvenlockup.enjin.com\"}}]}");
 		PacketPlayOutChat packet = new PacketPlayOutChat(comp, true);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}

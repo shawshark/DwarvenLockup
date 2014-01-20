@@ -1,4 +1,4 @@
-package me.matthijs110.DwarvenLockup;
+package me.matthijs110.DwarvenLockup.Teleports;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

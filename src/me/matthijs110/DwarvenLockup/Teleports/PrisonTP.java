@@ -1,4 +1,4 @@
-package me.matthijs110.DwarvenLockup;
+package me.matthijs110.DwarvenLockup.Teleports;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -10,9 +10,8 @@ import org.bukkit.entity.Player;
 
 public class PrisonTP implements CommandExecutor {
 
-	// Prison commands
 	public boolean onCommand (CommandSender sender, Command cmd, String label, String[] args) {
-		
+
 		Player p = (Player) sender;
 
 		Location cprison = new Location (Bukkit.getServer().getWorld("Prison"), 3284.48976, 63, -418.49132, 359, -3);
