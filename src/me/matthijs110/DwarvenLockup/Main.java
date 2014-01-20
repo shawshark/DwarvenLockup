@@ -36,7 +36,7 @@ public class Main extends JavaPlugin implements Listener {
 	//     - Make package for TP classes
 	//     - Make package for Extra
 	
-	public static Economy eco = null;
+	public Economy eco = null;
 	
 	private boolean setupEconomy() {
 		RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);

@@ -31,7 +31,7 @@ public class ScoreBoard {
 		Score RankupPrice = objective.getScore(Bukkit.getOfflinePlayer(ChatColor.AQUA + "Rankup price "));
 
 		online.setScore(Bukkit.getServer().getOnlinePlayers().length);
-		money.setScore((int) Main.eco.getBalance(p.getName()));
+		money.setScore((int) m.eco.getBalance(p.getName()));
 		if (p.hasPermission("prison.rankup.c")) { //The permission node needs to be in that rank. Value contains amount of money for rankup to B. //
 			RankupPrice.setScore(25000);
 		}
